@@ -1,11 +1,13 @@
 package site.nomoreparties.stellarburgers;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import java.time.Duration;
+
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.page;
 
 
@@ -22,6 +24,9 @@ public class RegisterPage {
     private SelenideElement enterButton;
     @FindBy(how = How.XPATH, using = ".//h2[text() = 'Регистрация']")
     private SelenideElement registrationHeader;
+    @FindBy(how = How.XPATH, using = ".//p[text() = 'Некорректный пароль']")
+    private SelenideElement passwordIncorrectInput;
+
 
     public void setName(String name) {
         nameInput.setValue(name);
@@ -40,17 +45,25 @@ public class RegisterPage {
         return page(RegisterPage.class);
     }
 
-    @Step("New user registration")
-    public void registration(String name, String email, String password) {
-        setName(name);
-        setEmail(email);
-        setPassword(password);
-        registrationButtonClick();
-        registrationHeader.shouldNotBe(Condition.visible);
-    }
-    @Step("Click enter button on registration page")
     public void enterButtonClick() {
         enterButton.click();
     }
 
+    @Step("New user successful registration, correct password")
+    public void registrationSuccess(String name, String email, String password) {
+        setName(name);
+        setEmail(email);
+        setPassword(password);
+        registrationButtonClick();
+        registrationHeader.shouldNotBe(visible, Duration.ofSeconds(3));
+    }
+
+    @Step("New user failed registration, incorrect password")
+    public boolean registrationFail(String name, String email, String password) {
+        setName(name);
+        setEmail(email);
+        setPassword(password);
+        registrationButtonClick();
+        return passwordIncorrectInput.isDisplayed();
+    }
 }
