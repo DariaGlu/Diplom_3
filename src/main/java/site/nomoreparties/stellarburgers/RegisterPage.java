@@ -20,7 +20,7 @@ public class RegisterPage {
     private SelenideElement passwordInput;
     @FindBy(how = How.XPATH, using = ".//button[text() = 'Зарегистрироваться']")
     private SelenideElement registrationButton;
-    @FindBy(how = How.XPATH, using = ".//a[@ahref = '/login']")
+    @FindBy(how = How.XPATH, using = ".//a[@href = '/login']")
     private SelenideElement enterButton;
     @FindBy(how = How.XPATH, using = ".//h2[text() = 'Регистрация']")
     private SelenideElement registrationHeader;
@@ -45,8 +45,9 @@ public class RegisterPage {
         return page(RegisterPage.class);
     }
 
-    public void enterButtonClick() {
+    public LoginPage enterButtonClick() {
         enterButton.click();
+        return page(LoginPage.class);
     }
 
     @Step("New user successful registration, correct password")

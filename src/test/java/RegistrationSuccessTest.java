@@ -1,4 +1,4 @@
-import api.UserDeletion;
+import api.UserCreateDelete;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
@@ -28,8 +28,7 @@ public class RegistrationSuccessTest {
     @Before
     public void setUp() {
         Configuration.startMaximized = true;
-        mainPage = open(MAIN_PAGE_URL,
-                MainPage.class);
+        mainPage = open(MAIN_PAGE_URL, MainPage.class);
         name = RandomStringUtils.randomAlphanumeric(3, 10);
         email = RandomStringUtils.randomAlphanumeric(3, 10).toLowerCase() + "@yandex.ru";
         password = RandomStringUtils.randomAlphanumeric(6, 12);
@@ -40,8 +39,8 @@ public class RegistrationSuccessTest {
         loginPage.authorization(email, password);
         String accessToken = localStorage().getItem("accessToken");
         Selenide.closeWebDriver();
-        UserDeletion userDeletion = new UserDeletion();
-        userDeletion.deleteUser(accessToken)
+        UserCreateDelete userDeletion = new UserCreateDelete();
+        userDeletion.delete(accessToken)
                 .statusCode(HTTP_ACCEPTED);
     }
 

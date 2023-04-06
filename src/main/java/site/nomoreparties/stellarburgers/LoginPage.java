@@ -43,10 +43,11 @@ public class LoginPage {
     }
 
     @Step("User authorization")
-    public void authorization(String email, String password) {
+    public MainPage authorization(String email, String password) {
         setEmail(email);
         setPassword(password);
         enterButtonClick();
-        enterHeader.shouldNotBe(visible, Duration.ofSeconds(3));
+        enterHeader.shouldNotBe(visible, Duration.ofSeconds(4));
+        return page(MainPage.class);
     }
 }
