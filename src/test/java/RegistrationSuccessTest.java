@@ -47,7 +47,7 @@ public class RegistrationSuccessTest {
     @Test
     @DisplayName("Успешная регистрация пользователя, корректный пароль")
     public void registrationSucceed() {
-        loginPage = mainPage.headerPersonalAccountButtonClick();
+        loginPage = mainPage.personalAccountButtonClickToLoginPage();
         RegisterPage registerPage = loginPage.registerButtonClick();
         registerPage.registrationSuccess(name, email, password);
         String currentUrl = WebDriverRunner.getWebDriver().getCurrentUrl();

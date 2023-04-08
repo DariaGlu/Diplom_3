@@ -19,8 +19,6 @@ public class LoginPage {
     private SelenideElement passwordInput;
     @FindBy(how = How.XPATH, using = ".//button[text() = 'Войти']")
     private SelenideElement enterButton;
-    @FindBy(how = How.XPATH, using = ".//a[@href= '/forgot-password']")
-    private SelenideElement forgotPasswordButton;
     @FindBy(how = How.XPATH, using = ".//h2[text() = 'Вход']")
     private SelenideElement enterHeader;
 
@@ -34,6 +32,7 @@ public class LoginPage {
 
     public MainPage enterButtonClick() {
         enterButton.click();
+        enterHeader.shouldNotBe(visible, Duration.ofSeconds(3));
         return page(MainPage.class);
     }
 
@@ -47,7 +46,11 @@ public class LoginPage {
         setEmail(email);
         setPassword(password);
         enterButtonClick();
-        enterHeader.shouldNotBe(visible, Duration.ofSeconds(4));
         return page(MainPage.class);
+    }
+
+    public boolean enterButtonIsDisplayed() {
+        enterButton.shouldBe(visible);
+        return enterButton.isDisplayed();
     }
 }

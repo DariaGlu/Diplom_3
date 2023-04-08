@@ -62,7 +62,7 @@ public class AuthTest {
     @Test
     public void authPersonalAccountMainPage() {
         MainPage mainPage = open(MAIN_PAGE_URL, MainPage.class);
-        LoginPage loginPage = mainPage.headerPersonalAccountButtonClick();
+        LoginPage loginPage = mainPage.personalAccountButtonClickToLoginPage();
         loginPage.authorization(email, password);
         boolean orderButtonIsDisplayed = mainPage.isOrderButtonDisplayed();
         String currentUrl = WebDriverRunner.getWebDriver().getCurrentUrl();

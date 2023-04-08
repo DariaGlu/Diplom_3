@@ -30,7 +30,7 @@ public class RegistrationFailTest {
     @Test
     @DisplayName("Неуспешная регистрация, некорректный пароль")
     public void registrationFailed() {
-        LoginPage loginPage = mainPage.headerPersonalAccountButtonClick();
+        LoginPage loginPage = mainPage.personalAccountButtonClickToLoginPage();
         RegisterPage registerPage = loginPage.registerButtonClick();
         boolean didRegistrationFailed = registerPage.registrationFail(name, email, password);
         assertTrue("Регистрация не провалилась, сообщение о некорректном пароле не выведено", didRegistrationFailed);
