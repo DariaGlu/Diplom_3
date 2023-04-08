@@ -1,6 +1,7 @@
 import com.codeborne.selenide.Configuration;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 import site.nomoreparties.stellarburgers.MainPage;
 
@@ -8,33 +9,33 @@ import static com.codeborne.selenide.Selenide.open;
 import static urls.Urls.MAIN_PAGE_URL;
 
 public class MainPageConstructorTest {
-    private static MainPage mainPage;
+    private MainPage mainPage;
 
-    @BeforeClass
-    public static void globalSetUp() {
+    @Before
+    public void setUp() {
         Configuration.startMaximized = true;
         mainPage = open(MAIN_PAGE_URL, MainPage.class);
     }
 
     @Test
+    @DisplayName("Проверка перехода на вкладку 'Булочки' в разделе 'Конструктор'")
     public void checkBunTabCurrent() {
         mainPage.fillingTabClick();
-        mainPage.bunTabClick();
-        String currentTab = mainPage.returnCurrentBunTab();
-        Assert.assertTrue(currentTab.contains("current"));
+        String currentTab = mainPage.bunTabClick();
+        Assert.assertTrue("Вкладка неактивна", currentTab.contains("current"));
     }
 
     @Test
+    @DisplayName("Проверка перехода на вкладку 'Соусы' в разделе 'Конструктор'")
     public void checkSauceTabCurrent() {
-        mainPage.sauceTabClick();
-        String currentTab = mainPage.returnCurrentSauceTab();
-        Assert.assertTrue(currentTab.contains("current"));
+        String currentTab = mainPage.sauceTabClick();
+        Assert.assertTrue("Вкладка неактивна", currentTab.contains("current"));
     }
 
     @Test
+    @DisplayName("Проверка перехода на вкладку 'Начинки' в разделе 'Конструктор'")
     public void checkFillingTabCurrent() {
-        mainPage.fillingTabClick();
-        String currentTab = mainPage.returnCurrentFillingTab();
-        Assert.assertTrue(currentTab.contains("current"));
+        String currentTab = mainPage.fillingTabClick();
+        Assert.assertTrue("Вкладка неактивна", currentTab.contains("current"));
     }
 }

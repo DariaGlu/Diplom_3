@@ -20,7 +20,7 @@ public class UserCreateDelete {
                 .build();
     }
 
-    @Step("Create new user {user}")
+    @Step("Подготовка тестовых данных: создание нового пользователя через api")
     public ValidatableResponse create(String email, String password, String name) {
         String json = "{\"email\":\"" + email + "\","
                 + "\"password\":\"" + password + "\","
@@ -33,7 +33,7 @@ public class UserCreateDelete {
                 .then();
     }
 
-    @Step("Delete user")
+    @Step("Удаление тестового пользователя через api")
     public ValidatableResponse delete(String accessToken) {
         return given()
                 .spec(getBaseReqSpec())

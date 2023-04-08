@@ -2,6 +2,7 @@ import api.UserCreateDelete;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.*;
@@ -48,6 +49,7 @@ public class PersonalAccountTest {
     }
 
     @Test
+    @DisplayName("Проверка перехода в личный кабинет с главной страницы")
     public void personalAccountRedirect() {
         AccountProfilePage accountProfilePage = mainPage.personalAccountButtonClickToAccountProfilePage();
         boolean profileButtonIsDisplayed = accountProfilePage.profileButtonIsDisplayed();
@@ -57,6 +59,7 @@ public class PersonalAccountTest {
     }
 
     @Test
+    @DisplayName("Проверка перехода на главную страницу из личного кабинета по клику 'Конструктор'")
     public void constructorMainPageRedirect() {
         AccountProfilePage accountProfilePage = mainPage.personalAccountButtonClickToAccountProfilePage();
         mainPage = accountProfilePage.constructorButtonClick();
@@ -67,6 +70,18 @@ public class PersonalAccountTest {
     }
 
     @Test
+    @DisplayName("Проверка перехода на главную страницу из личного кабинета по клику на логотип")
+    public void logoMainPageRedirect() {
+        AccountProfilePage accountProfilePage = mainPage.personalAccountButtonClickToAccountProfilePage();
+        mainPage = accountProfilePage.logoClick();
+        boolean orderButtonIsDisplayed = mainPage.isOrderButtonDisplayed();
+        String currentUrl = WebDriverRunner.getWebDriver().getCurrentUrl();
+        assertEquals("Пользователя не перенаправило на главную страницу", MAIN_PAGE_URL, currentUrl);
+        assertTrue("Кнопка 'Оформить заказ' не появилась", orderButtonIsDisplayed);
+    }
+
+    @Test
+    @DisplayName("Проверка перехода на страницу входа по клику 'Выход' в личном кабинете")
     public void exitLoginPageRedirect() {
         AccountProfilePage accountProfilePage = mainPage.personalAccountButtonClickToAccountProfilePage();
         LoginPage loginPage = accountProfilePage.exitButtonClick();

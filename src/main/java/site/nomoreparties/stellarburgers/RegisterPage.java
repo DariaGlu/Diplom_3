@@ -28,29 +28,34 @@ public class RegisterPage {
     private SelenideElement passwordIncorrectInput;
 
 
+    @Step("Ввод имени")
     public void setName(String name) {
         nameInput.setValue(name);
     }
 
+    @Step("Ввод email")
     public void setEmail(String email) {
         emailInput.setValue(email);
     }
 
+    @Step("Ввод пароля")
     public void setPassword(String password) {
         passwordInput.setValue(password);
     }
 
+    @Step("Клик по кнопке 'Зарегистрироваться'")
     public RegisterPage registrationButtonClick() {
         registrationButton.click();
         return page(RegisterPage.class);
     }
 
+    @Step("Клик по кнопке 'Войти'")
     public LoginPage enterButtonClick() {
         enterButton.click();
         return page(LoginPage.class);
     }
 
-    @Step("New user successful registration, correct password")
+    @Step("Вход пользователя с корректным паролем")
     public void registrationSuccess(String name, String email, String password) {
         setName(name);
         setEmail(email);
@@ -59,7 +64,7 @@ public class RegisterPage {
         registrationHeader.shouldNotBe(visible, Duration.ofSeconds(3));
     }
 
-    @Step("New user failed registration, incorrect password")
+    @Step("Вход пользователя с некорректным паролем")
     public boolean registrationFail(String name, String email, String password) {
         setName(name);
         setEmail(email);

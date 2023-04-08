@@ -1,6 +1,7 @@
 package site.nomoreparties.stellarburgers;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
@@ -23,49 +24,47 @@ public class MainPage {
     @FindBy(how = How.XPATH, using = ".//div[./span[text()='Начинки']]")
     private SelenideElement fillingTab;
 
+    @Step("Клик по кнопке 'Личный кабинет' на главной странице для не авторизованного пользователя")
     public LoginPage personalAccountButtonClickToLoginPage() {
         personalAccountButton.click();
         orderButton.shouldNotBe(visible, Duration.ofSeconds(3));
         return page(LoginPage.class);
     }
 
+    @Step("Клик по кнопке 'Личный кабинет' на главной странице для авторизованного пользователя")
     public AccountProfilePage personalAccountButtonClickToAccountProfilePage() {
         personalAccountButton.click();
         orderButton.shouldNotBe(visible, Duration.ofSeconds(5));
         return page(AccountProfilePage.class);
     }
 
+    @Step("Клик по кнопке 'Войти в аккаунт' на главной странице")
     public LoginPage loginButtonClick() {
         loginButton.click();
         return page(LoginPage.class);
     }
 
+    @Step("Ожидание видимости кнопки 'Оформить заказ' для авторизованного пользователя")
     public boolean isOrderButtonDisplayed() {
         orderButton.shouldBe(visible);
         return orderButton.isDisplayed();
     }
 
-    public void bunTabClick() {
+    @Step("Клик по вкладке 'Булки' в разделе 'Конструктор'")
+    public String bunTabClick() {
         bunTab.click();
-    }
-
-    public String returnCurrentBunTab() {
         return bunTab.getAttribute("class");
     }
 
-    public void sauceTabClick() {
+    @Step("Клик по вкладке 'Соусы' в разделе 'Конструктор'")
+    public String sauceTabClick() {
         sauceTab.click();
-    }
-
-    public String returnCurrentSauceTab() {
         return sauceTab.getAttribute("class");
     }
 
-    public void fillingTabClick() {
+    @Step("Клик по вкладке 'Начинки' в разделе 'Конструктор'")
+    public String fillingTabClick() {
         fillingTab.click();
-    }
-
-    public String returnCurrentFillingTab() {
         return fillingTab.getAttribute("class");
     }
 

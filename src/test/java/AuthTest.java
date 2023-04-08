@@ -2,6 +2,7 @@ import api.UserCreateDelete;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.*;
@@ -49,6 +50,7 @@ public class AuthTest {
     }
 
     @Test
+    @DisplayName("Вход пользователя через кнопку 'Войти в аккаунт' на главной странице")
     public void authLoginButtonMainPage() {
         MainPage mainPage = open(MAIN_PAGE_URL, MainPage.class);
         LoginPage loginPage = mainPage.loginButtonClick();
@@ -60,6 +62,7 @@ public class AuthTest {
     }
 
     @Test
+    @DisplayName("Вход пользователя через кнопку 'Личный кабинет' на главной странице")
     public void authPersonalAccountMainPage() {
         MainPage mainPage = open(MAIN_PAGE_URL, MainPage.class);
         LoginPage loginPage = mainPage.personalAccountButtonClickToLoginPage();
@@ -71,6 +74,7 @@ public class AuthTest {
     }
 
     @Test
+    @DisplayName("Вход пользователя через кнопку 'Войти' на странице регистрации")
     public void authEnterButtonRegisterPage() {
         RegisterPage registerPage = open(REGISTER_PAGE_URL, RegisterPage.class);
         LoginPage loginPage = registerPage.enterButtonClick();
@@ -82,6 +86,7 @@ public class AuthTest {
     }
 
     @Test
+    @DisplayName("Вход пользователя через кнопку 'Войти' на странице восстановления пароля")
     public void authEnterButtonForgotPasswordPage() {
         ForgotPasswordPage forgotPasswordPage = open(FORGOT_PASSWORD_URL, ForgotPasswordPage.class);
         LoginPage loginPage = forgotPasswordPage.enterButtonClick();

@@ -22,26 +22,30 @@ public class LoginPage {
     @FindBy(how = How.XPATH, using = ".//h2[text() = 'Вход']")
     private SelenideElement enterHeader;
 
+    @Step("Ввод email")
     public void setEmail(String email) {
         emailInput.setValue(email);
     }
 
+    @Step("Ввод пароля")
     public void setPassword(String password) {
         passwordInput.setValue(password);
     }
 
+    @Step("Клик по кнопке 'Войти'")
     public MainPage enterButtonClick() {
         enterButton.click();
         enterHeader.shouldNotBe(visible, Duration.ofSeconds(3));
         return page(MainPage.class);
     }
 
+    @Step("Клик по кнопке 'Зарегистрироваться'")
     public RegisterPage registerButtonClick() {
         registerButton.click();
         return page(RegisterPage.class);
     }
 
-    @Step("User authorization")
+    @Step("Вход пользователя")
     public MainPage authorization(String email, String password) {
         setEmail(email);
         setPassword(password);
@@ -49,6 +53,7 @@ public class LoginPage {
         return page(MainPage.class);
     }
 
+    @Step("Ожидание видимости кнопки 'Войти'")
     public boolean enterButtonIsDisplayed() {
         enterButton.shouldBe(visible);
         return enterButton.isDisplayed();
