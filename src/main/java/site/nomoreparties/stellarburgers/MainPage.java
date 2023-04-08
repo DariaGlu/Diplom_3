@@ -34,7 +34,7 @@ public class MainPage {
     @Step("Клик по кнопке 'Личный кабинет' на главной странице для авторизованного пользователя")
     public AccountProfilePage personalAccountButtonClickToAccountProfilePage() {
         personalAccountButton.click();
-        orderButton.shouldNotBe(visible, Duration.ofSeconds(5));
+        orderButton.shouldNotBe(visible, Duration.ofSeconds(3));
         return page(AccountProfilePage.class);
     }
 

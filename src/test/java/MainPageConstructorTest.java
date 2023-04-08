@@ -13,6 +13,9 @@ public class MainPageConstructorTest {
 
     @Before
     public void setUp() {
+//        При необходимости провести тестирование в ЯБ, расскоментируй строки ниже
+//        System.setProperty("webdriver.chrome.driver", ".//Webdriver/yandexdriver.exe");
+//        System.setProperty("selenide.browser", "Chrome");
         Configuration.startMaximized = true;
         mainPage = open(MAIN_PAGE_URL, MainPage.class);
     }

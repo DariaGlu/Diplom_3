@@ -40,7 +40,7 @@ public class AccountProfilePage {
     @Step("Клик по кнопке 'Выход' в личном кабинете")
     public LoginPage exitButtonClick() {
         exitButton.click();
-        profileButton.shouldNotBe(visible, Duration.ofSeconds(5));
+        profileButton.shouldNotBe(visible, Duration.ofSeconds(3));
         return page(LoginPage.class);
     }
 }
